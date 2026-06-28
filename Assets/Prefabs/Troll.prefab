@@ -110,6 +110,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bf9dfac5fc113e4c97795e2bbcc753d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 233700947086319396}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bf9dfac5fc113e4c97795e2bbcc753d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 622406956861915117}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bf9dfac5fc113e4c97795e2bbcc753d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7348911860515249353}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6bf9dfac5fc113e4c97795e2bbcc753d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3622704943179758657}
   m_SourcePrefab: {fileID: 100100000, guid: 6bf9dfac5fc113e4c97795e2bbcc753d, type: 3}
 --- !u!95 &705630337549782101 stripped
 Animator:
@@ -145,6 +154,7 @@ MonoBehaviour:
     mpRegenPerSecond: 6
     crit: 0.05
     dodge: 0.02
+  indestructible: 0
   outOfCombatDelay: 10
   fullHealSeconds: 35
 --- !u!114 &1460270383347535290
@@ -255,3 +265,54 @@ MonoBehaviour:
   fillColor: {r: 0.85, g: 0.2, b: 0.15, a: 1}
   backColor: {r: 0.04, g: 0.04, b: 0.04, a: 1}
   hideWhenFull: 1
+--- !u!114 &622406956861915117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6080171164266220693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 969578731
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 7348911860515249353}
+  - {fileID: 3622704943179758657}
+  ForceRemoteRenderTimeframe: 0
+--- !u!114 &7348911860515249353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6080171164266220693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
+--- !u!114 &3622704943179758657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6080171164266220693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fbba413c01a6d43af642fa05608cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _NetSpeed: 0
+  _NetHP: 0

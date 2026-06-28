@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrystalSpider_Green
       objectReference: {fileID: 0}
+    - target: {fileID: 2666553929708675819, guid: 8ec8544bce729f1488f5737eed1e233d, type: 3}
+      propertyPath: SortKey
+      value: 3124283361
+      objectReference: {fileID: 0}
     - target: {fileID: 4559505798935298246, guid: 8ec8544bce729f1488f5737eed1e233d, type: 3}
       propertyPath: displayName
       value: Green Crystal Spider

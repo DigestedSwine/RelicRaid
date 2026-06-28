@@ -96,6 +96,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3ab7f2a0a3ca8147995cf1c0f96b41d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1181212188179887635}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3ab7f2a0a3ca8147995cf1c0f96b41d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1045658094773903791}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3ab7f2a0a3ca8147995cf1c0f96b41d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4616453940621939019}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d3ab7f2a0a3ca8147995cf1c0f96b41d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9061779801536504185}
   m_SourcePrefab: {fileID: 100100000, guid: d3ab7f2a0a3ca8147995cf1c0f96b41d, type: 3}
 --- !u!4 &161814810564119715 stripped
 Transform:
@@ -131,6 +140,7 @@ MonoBehaviour:
     mpRegenPerSecond: 6
     crit: 0.05
     dodge: 0.02
+  indestructible: 0
   outOfCombatDelay: 10
   fullHealSeconds: 35
 --- !u!114 &1072290014923269366
@@ -280,6 +290,57 @@ MonoBehaviour:
   sinkDepth: 2
   sinkTime: 1.6
   fade: 1
+--- !u!114 &1045658094773903791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226282377654218106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 4176260567
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 4616453940621939019}
+  - {fileID: 9061779801536504185}
+  ForceRemoteRenderTimeframe: 0
+--- !u!114 &4616453940621939019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226282377654218106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
+--- !u!114 &9061779801536504185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226282377654218106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fbba413c01a6d43af642fa05608cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _NetSpeed: 0
+  _NetHP: 0
 --- !u!4 &1738283607820595162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7494802366214406159, guid: d3ab7f2a0a3ca8147995cf1c0f96b41d, type: 3}

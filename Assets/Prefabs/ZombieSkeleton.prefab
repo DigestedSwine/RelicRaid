@@ -495,6 +495,9 @@ GameObject:
   - component: {fileID: 5826873599075452636}
   - component: {fileID: 8400908290893704284}
   - component: {fileID: 2056867652331690768}
+  - component: {fileID: 259149142548234508}
+  - component: {fileID: 7021127786388208719}
+  - component: {fileID: 7521928120154655460}
   m_Layer: 0
   m_Name: ZombieSkeleton
   m_TagString: Untagged
@@ -565,6 +568,7 @@ MonoBehaviour:
     mpRegenPerSecond: 6
     crit: 0.1
     dodge: 0.05
+  indestructible: 0
   outOfCombatDelay: 10
   fullHealSeconds: 35
 --- !u!114 &2926593510294232619
@@ -674,6 +678,57 @@ MonoBehaviour:
   fillColor: {r: 0.85, g: 0.2, b: 0.15, a: 1}
   backColor: {r: 0.04, g: 0.04, b: 0.04, a: 1}
   hideWhenFull: 1
+--- !u!114 &259149142548234508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2837566493379797879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 4020060186
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 7021127786388208719}
+  - {fileID: 7521928120154655460}
+  ForceRemoteRenderTimeframe: 0
+--- !u!114 &7021127786388208719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2837566493379797879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
+--- !u!114 &7521928120154655460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2837566493379797879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fbba413c01a6d43af642fa05608cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _NetSpeed: 0
+  _NetHP: 0
 --- !u!1 &2895363130158883746
 GameObject:
   m_ObjectHideFlags: 0

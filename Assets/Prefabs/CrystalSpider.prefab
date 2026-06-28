@@ -145,6 +145,9 @@ GameObject:
   - component: {fileID: 2189000307481730644}
   - component: {fileID: 2296378739334368714}
   - component: {fileID: 6786128782815770600}
+  - component: {fileID: 2666553929708675819}
+  - component: {fileID: 310264068738976999}
+  - component: {fileID: 8857677684661882144}
   m_Layer: 0
   m_Name: CrystalSpider
   m_TagString: Untagged
@@ -215,6 +218,7 @@ MonoBehaviour:
     mpRegenPerSecond: 6
     crit: 0.1
     dodge: 0.05
+  indestructible: 0
   outOfCombatDelay: 10
   fullHealSeconds: 35
 --- !u!114 &7681560538451901660
@@ -342,6 +346,57 @@ MonoBehaviour:
   sinkDepth: 2
   sinkTime: 1.6
   fade: 1
+--- !u!114 &2666553929708675819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757396039033316156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 602974244
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 310264068738976999}
+  - {fileID: 8857677684661882144}
+  ForceRemoteRenderTimeframe: 0
+--- !u!114 &310264068738976999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757396039033316156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
+--- !u!114 &8857677684661882144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757396039033316156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fbba413c01a6d43af642fa05608cbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _NetSpeed: 0
+  _NetHP: 0
 --- !u!1 &799149791804169406
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a60e9c17c1732d544a79615c31e977df, type: 2}
+    - target: {fileID: 2666553929708675819, guid: 8ec8544bce729f1488f5737eed1e233d, type: 3}
+      propertyPath: SortKey
+      value: 4113199338
+      objectReference: {fileID: 0}
     - target: {fileID: 4559505798935298246, guid: 8ec8544bce729f1488f5737eed1e233d, type: 3}
       propertyPath: displayName
       value: Redfire Crystal Spider
