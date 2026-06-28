@@ -9,8 +9,9 @@ public class Miner : MonoBehaviour
 {
     public InputReader input;
     public float range = 3.5f;
-    public bool holdToMine = false;     // false = auto-mine when in range; true = hold Interact (E / gamepad)
-    public bool cancelOnDamage = true;  // GDD open Q: full cancel (chosen) vs delay
+    public bool requireStandStill = true; // STOP-to-mine: must be standing still to channel (moving cancels)
+    public bool holdToMine = false;       // alt mode: hold Interact (E / gamepad) instead
+    public bool cancelOnDamage = true;    // taking damage interrupts the channel (full cancel)
 
     HealthComponent health;
     ResourceNode current;
@@ -34,7 +35,8 @@ public class Miner : MonoBehaviour
         if (!health.IsAlive) { Cancel(); return; }
 
         ResourceNode node = FindNode();
-        bool wantMine = node != null && (!holdToMine || (input != null && input.InteractHeld));
+        bool moving = requireStandStill && input != null && input.MoveInput.sqrMagnitude > 0.02f;
+        bool wantMine = node != null && !moving && (!holdToMine || (input != null && input.InteractHeld));
 
         if (!wantMine) { Cancel(); return; }
 

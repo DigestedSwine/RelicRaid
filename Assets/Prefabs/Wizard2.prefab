@@ -103,6 +103,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9062845459687495907}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1680711706695919072}
   m_SourcePrefab: {fileID: 100100000, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
 --- !u!1 &1057827507799693184 stripped
 GameObject:
@@ -153,6 +156,7 @@ MonoBehaviour:
   rotationSpeed: 720
   gravity: -20
   animDamp: 0.1
+  networkDriven: 0
 --- !u!114 &5942491422684034154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: 2640f011deb058645988e2b194efb2ce, type: 2}
   range: 3.5
+  requireStandStill: 1
   holdToMine: 0
   cancelOnDamage: 1
 --- !u!114 &4784878559782740718
@@ -351,6 +356,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78134acd16dad0943aa0434e22ea8190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1680711706695919072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057827507799693184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e98a239cb10b943b7a8a4963f61fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  miner: {fileID: 7086010469064667752}
+  crystalColor: {r: 0.4, g: 0.85, b: 1, a: 1}
+  sparkInterval: 0.16
 --- !u!95 &5982421857146771264 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
