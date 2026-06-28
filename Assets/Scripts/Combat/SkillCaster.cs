@@ -16,11 +16,13 @@ public class SkillCaster : MonoBehaviour
     public SkillData[] skills = new SkillData[4];
 
     float[] readyAt;
+    NetworkPlayer netPlayer;
 
     void Awake()
     {
         if (self == null) self = GetComponent<HealthComponent>();
         if (animator == null) animator = GetComponent<Animator>();
+        netPlayer = GetComponent<NetworkPlayer>();
         readyAt = new float[skills.Length];
     }
 
@@ -51,8 +53,9 @@ public class SkillCaster : MonoBehaviour
 
     IEnumerator CastRoutine(SkillData skill)
     {
-        if (animator != null && !string.IsNullOrEmpty(skill.animTrigger))
-            animator.SetTrigger(skill.animTrigger);
+        // Networked → replicate the cast/attack/aoe trigger so other players see it; else play locally.
+        if (netPlayer != null) netPlayer.FireAction(skill.animTrigger);
+        else if (animator != null && !string.IsNullOrEmpty(skill.animTrigger)) animator.SetTrigger(skill.animTrigger);
         if (skill.castTime > 0f) yield return new WaitForSeconds(skill.castTime);
         if (self != null && !self.IsAlive) yield break;
         Resolve(skill);

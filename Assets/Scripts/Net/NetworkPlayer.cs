@@ -79,4 +79,23 @@ public class NetworkPlayer : NetworkBehaviour
         // Proxies drive their Animator from the networked value (authority's HeroController already sets it).
         if (!HasStateAuthority && animator != null) animator.SetFloat(SpeedHash, NetSpeed);
     }
+
+    // ---- one-shot action triggers (Cast/Attack/AoE) — SkillCaster calls this so remotes see you act ----
+    public void FireAction(string trigger)
+    {
+        if (string.IsNullOrEmpty(trigger)) return;
+        if (animator != null) animator.SetTrigger(trigger);          // local, immediate
+        if (Object != null && Object.IsValid) RPC_Action(TriggerId(trigger));
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    void RPC_Action(int id)
+    {
+        if (HasStateAuthority) return;                                // already played locally
+        string t = TriggerName(id);
+        if (animator != null && t != null) animator.SetTrigger(t);
+    }
+
+    static int TriggerId(string t) { switch (t) { case "Cast": return 1; case "Attack": return 2; case "AoE": return 3; default: return 0; } }
+    static string TriggerName(int id) { switch (id) { case 1: return "Cast"; case 2: return "Attack"; case 3: return "AoE"; default: return null; } }
 }

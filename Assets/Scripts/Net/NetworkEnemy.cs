@@ -50,4 +50,23 @@ public class NetworkEnemy : NetworkBehaviour
     {
         if (health != null) health.TakeDamage(amount, (DamageType)type);
     }
+
+    // One-shot attack-trigger replication — NPCController.Swing calls this so proxies see the enemy attack.
+    public void FireAction(string trigger)
+    {
+        if (string.IsNullOrEmpty(trigger)) return;
+        if (animator != null) animator.SetTrigger(trigger);          // authority, immediate
+        if (Object != null && Object.IsValid) RPC_Action(TriggerId(trigger));
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    void RPC_Action(int id)
+    {
+        if (HasStateAuthority) return;
+        string t = TriggerName(id);
+        if (animator != null && t != null) animator.SetTrigger(t);
+    }
+
+    static int TriggerId(string t) { switch (t) { case "Cast": return 1; case "Attack": return 2; case "AoE": return 3; default: return 0; } }
+    static string TriggerName(int id) { switch (id) { case 1: return "Cast"; case 2: return "Attack"; case 3: return "AoE"; default: return null; } }
 }

@@ -49,6 +49,7 @@ public class NPCController : MonoBehaviour
 
     HealthComponent health;
     Animator animator;
+    NetworkEnemy netEnemy;     // if networked, attack triggers replicate through it
     Transform target;
     HealthComponent targetHealth;
     Vector3 spawnPos;
@@ -71,6 +72,7 @@ public class NPCController : MonoBehaviour
     {
         health = GetComponent<HealthComponent>();
         animator = GetComponent<Animator>();
+        netEnemy = GetComponent<NetworkEnemy>();
         speedHash = Animator.StringToHash(speedParam);
     }
 
@@ -189,7 +191,8 @@ public class NPCController : MonoBehaviour
         swinging = true;
         nextAttack = Time.time + attackCooldown;
         AttackWindup?.Invoke(attackWindup);
-        if (animator != null && !string.IsNullOrEmpty(attackTrigger)) animator.SetTrigger(attackTrigger);
+        if (netEnemy != null) netEnemy.FireAction(attackTrigger);    // replicate the swing to proxies
+        else if (animator != null && !string.IsNullOrEmpty(attackTrigger)) animator.SetTrigger(attackTrigger);
         yield return new WaitForSeconds(attackWindup);
         if (health.IsAlive && targetHealth != null && targetHealth.IsAlive &&
             PlanarDist(target.position) <= attackRange * 1.3f)
