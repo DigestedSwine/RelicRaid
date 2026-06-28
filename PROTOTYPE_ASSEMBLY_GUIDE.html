@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CYD Commander — Hardware Assembly Guide</title>
+<style>
+  @page {
+    size: letter;
+    margin: 0.75in;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000;
+    max-width: 7in;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+  }
+
+  h1 {
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 24pt;
+    text-align: center;
+    border-bottom: 4px solid #000;
+    padding-bottom: 10px;
+    margin-top: 0;
+  }
+
+  h2 {
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 18pt;
+    background: #000;
+    color: #fff;
+    padding: 8px 12px;
+    margin-top: 40px;
+    page-break-before: always;
+  }
+
+  h2:first-of-type { page-break-before: avoid; }
+
+  h3 {
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 14pt;
+    border-bottom: 2px solid #000;
+    padding-bottom: 4px;
+    margin-top: 24px;
+  }
+
+  h4 {
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 12pt;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    page-break-inside: avoid;
+  }
+
+  th {
+    background: #333;
+    color: #fff;
+    text-align: left;
+    padding: 8px 10px;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 10pt;
+  }
+
+  td {
+    border: 1px solid #aaa;
+    padding: 8px 10px;
+    vertical-align: top;
+    font-size: 10.5pt;
+  }
+
+  tr:nth-child(even) td { background: #f5f5f5; }
+
+  .module-diagram {
+    border: 2px solid #000;
+    padding: 16px;
+    margin: 16px 0;
+    background: #fafafa;
+    page-break-inside: avoid;
+    font-family: 'Courier New', monospace;
+  }
+
+  .module-title {
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid #888;
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    font-size: 11pt;
+  }
+
+  .module-box {
+    border: 2px solid #000;
+    padding: 18px 12px;
+    text-align: center;
+    margin: 12px 0;
+    background: #fff;
+    position: relative;
+    min-height: 60px;
+  }
+
+  .pin-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 9pt;
+  }
+
+  .pin {
+    border: 1px solid #000;
+    padding: 4px 10px;
+    background: #fff;
+    min-width: 50px;
+  }
+
+  .pin-label {
+    font-size: 8pt;
+    font-weight: normal;
+    color: #555;
+    margin-top: 3px;
+  }
+
+  .warning {
+    border: 3px solid #c00;
+    background: #fff5f5;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-weight: bold;
+    page-break-inside: avoid;
+  }
+
+  .warning::before {
+    content: "⚠ WARNING ";
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 12pt;
+    display: block;
+    color: #c00;
+    margin-bottom: 6px;
+  }
+
+  .test-box {
+    border: 2px solid #060;
+    background: #f5fff5;
+    padding: 12px 16px;
+    margin: 16px 0;
+    page-break-inside: avoid;
+  }
+
+  .test-box::before {
+    content: "■ MULTIMETER TEST";
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-size: 11pt;
+    display: block;
+    color: #060;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+
+  .pass { color: #060; font-weight: bold; }
+  .fail { color: #c00; font-weight: bold; }
+
+  .connection-arrow {
+    text-align: center;
+    font-size: 18pt;
+    margin: 4px 0;
+    font-weight: bold;
+  }
+
+  .flow-diagram {
+    border: 2px solid #000;
+    padding: 16px;
+    margin: 20px 0;
+    background: #fafafa;
+    page-break-inside: avoid;
+  }
+
+  .flow-box {
+    border: 2px solid #000;
+    padding: 10px;
+    margin: 4px auto;
+    width: 60%;
+    text-align: center;
+    background: #fff;
+    font-family: 'Helvetica', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 10pt;
+  }
+
+  .step-num {
+    display: inline-block;
+    background: #000;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-weight: bold;
+    margin-right: 8px;
+    font-family: 'Helvetica', Arial, sans-serif;
+  }
+
+  ul, ol { padding-left: 28px; }
+  li { margin: 4px 0; }
+
+  .toc {
+    border: 1px solid #aaa;
+    padding: 16px 24px;
+    background: #f9f9f9;
+    margin: 20px 0;
+  }
+
+  .toc ol { padding-left: 24px; }
+  .toc li { margin: 6px 0; }
+
+  .wire-key {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #000;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+
+  .red { background: #c00; }
+  .black { background: #000; }
+  .yellow { background: #ec0; }
+  .blue { background: #06c; }
+
+  .signature-line {
+    border-top: 1px solid #aaa;
+    margin-top: 30px;
+    padding-top: 8px;
+    font-size: 9pt;
+    color: #666;
+    text-align: center;
+  }
+
+  @media print {
+    body { margin: 0; padding: 0; }
+    h2 { page-break-before: always; }
+    .test-box, .warning, .module-diagram, .flow-diagram { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>CYD Commander<br><span style="font-size:14pt; font-weight:normal;">MTG Commander Life Tracker — Hardware Assembly Guide</span></h1>
+
+<div class="toc">
+<h3 style="margin-top:0; border:none;">Contents</h3>
+<ol>
+  <li>Parts List & Tools</li>
+  <li>Master Wiring Overview</li>
+  <li>Stage 1 — Battery & Charging (TP4056)</li>
+  <li>Stage 2 — Boost Converter (MT3608)</li>
+  <li>Stage 3 — Power Switch</li>
+  <li>Stage 4 — CYD Power Input</li>
+  <li>Stage 5 — Haptic Feedback Circuit</li>
+  <li>Final System Verification</li>
+  <li>Troubleshooting</li>
+</ol>
+</div>
+
+<h2>1. Parts List & Tools</h2>
+
+<h3>Power System Components</h3>
+<table>
+<thead><tr><th>#</th><th>Part</th><th>Qty</th><th>Identification</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>CYD ESP32-3248S035 (3.5" display)</td><td>1</td><td>Yellow PCB w/ touchscreen</td></tr>
+<tr><td>2</td><td>3.7V LiPo battery (1000mAh+)</td><td>1</td><td>Red/Black leads</td></tr>
+<tr><td>3</td><td>TP4056 charging module</td><td>1</td><td>USB-C input version</td></tr>
+<tr><td>4</td><td>MT3608 boost converter</td><td>1</td><td>Blue PCB w/ adjustment screw</td></tr>
+<tr><td>5</td><td>SPDT slide switch (3-pin)</td><td>1</td><td>Mini size</td></tr>
+<tr><td>6</td><td>Micro USB pigtail (2-wire)</td><td>1</td><td>Red & black wires</td></tr>
+<tr><td>7</td><td>1000µF 10V electrolytic capacitor</td><td>1</td><td>Cylindrical, polarized</td></tr>
+</tbody>
+</table>
+
+<h3>Haptic Feedback Components</h3>
+<table>
+<thead><tr><th>#</th><th>Part</th><th>Qty</th><th>Identification</th></tr></thead>
+<tbody>
+<tr><td>8</td><td>Coin vibration motor (3V)</td><td>1</td><td>Red & black leads</td></tr>
+<tr><td>9</td><td>2N7000 MOSFET (TO-92 package)</td><td>1</td><td>Marked "2N7000"</td></tr>
+<tr><td>10</td><td>1kΩ resistor</td><td>1</td><td>Brown-Black-Red bands</td></tr>
+<tr><td>11</td><td>10kΩ resistor</td><td>1</td><td>Brown-Black-Orange bands</td></tr>
+<tr><td>12</td><td>1N4148 diode</td><td>1</td><td>Black stripe = cathode</td></tr>
+</tbody>
+</table>
+
+<h3>Tools Required</h3>
+<ul>
+  <li>Soldering iron (350°C)</li>
+  <li>Solder (60/40 rosin core)</li>
+  <li>Wire strippers (22 AWG)</li>
+  <li>Flush cutters</li>
+  <li>Digital multimeter</li>
+  <li>Helping hands or PCB vise</li>
+  <li>Heat shrink tubing + heat source</li>
+  <li>Tweezers</li>
+  <li>Small Phillips screwdriver (for trimpot)</li>
+</ul>
+
+<div class="warning">
+<strong>Before you begin:</strong>
+<ul>
+  <li>NEVER short LiPo battery terminals — fire risk</li>
+  <li>Disconnect battery during all soldering until told to reconnect</li>
+  <li>Polarity matters on capacitors — backwards = explosion risk</li>
+  <li>Set MT3608 voltage BEFORE connecting CYD — overvoltage destroys it</li>
+  <li>Insulate every joint with heat shrink before next stage</li>
+</ul>
+</div>
+
+<h2>2. Master Wiring Overview</h2>
+
+<h3>Power Flow Chain</h3>
+
+<div class="flow-diagram">
+<div class="flow-box">LiPo Battery (3.0 – 4.2V)</div>
+<div class="connection-arrow">↓</div>
+<div class="flow-box">TP4056 Charger<br><span style="font-weight:normal; font-size:9pt;">USB-C charges battery</span></div>
+<div class="connection-arrow">↓</div>
+<div class="flow-box">MT3608 Boost (output: 5.0V)<br><span style="font-weight:normal; font-size:9pt;">1000µF smoothing cap across output</span></div>
+<div class="connection-arrow">↓</div>
+<div class="flow-box">SPDT Switch (On/Off)</div>
+<div class="connection-arrow">↓</div>
+<div class="flow-box">Micro USB Pigtail → CYD USB Port</div>
+</div>
+
+<h3>Wire Color Legend</h3>
+<p>
+<span class="wire-key red"></span> <strong>Red</strong> = Positive / 5V / 3.3V power<br>
+<span class="wire-key black"></span> <strong>Black</strong> = Ground (GND)<br>
+<span class="wire-key yellow"></span> <strong>Yellow</strong> = GPIO signal (haptic control)<br>
+<span class="wire-key blue"></span> <strong>Blue</strong> = Other / motor negative
+</p>
+
+<h2>3. Stage 1 — Battery & Charging (TP4056)</h2>
+
+<h3>TP4056 Module Layout</h3>
+
+<div class="module-diagram">
+<div class="module-title">TP4056 USB-C Charging Module (Top View)</div>
+<div class="module-box">
+[ USB-C Port ] &nbsp;&nbsp; ● RED LED (charging) &nbsp;&nbsp; ● BLUE LED (full)
+</div>
+<div class="pin-row">
+  <div class="pin">B+<div class="pin-label">Battery +</div></div>
+  <div class="pin">B−<div class="pin-label">Battery −</div></div>
+  <div class="pin">OUT+<div class="pin-label">to MT3608</div></div>
+  <div class="pin">OUT−<div class="pin-label">to MT3608</div></div>
+</div>
+</div>
+
+<h3>Step 1.1 — Connect Battery to TP4056</h3>
+
+<table>
+<thead><tr><th>From</th><th>To</th><th>Wire</th></tr></thead>
+<tbody>
+<tr><td>LiPo Battery <strong>RED (+)</strong></td><td>TP4056 <strong>B+</strong> pad</td><td><span class="wire-key red"></span> Red</td></tr>
+<tr><td>LiPo Battery <strong>BLACK (−)</strong></td><td>TP4056 <strong>B−</strong> pad</td><td><span class="wire-key black"></span> Black</td></tr>
+</tbody>
+</table>
+
+<h4>Procedure</h4>
+<ol>
+  <li>Strip 3mm off each battery wire</li>
+  <li>Tin both wire ends and both pads</li>
+  <li>Solder battery RED to B+ first</li>
+  <li>Solder battery BLACK to B− second</li>
+  <li>Apply heat shrink to each joint</li>
+</ol>
+
+<div class="test-box">
+<strong>Test 1.1 — Battery Voltage</strong>
+<table>
+<thead><tr><th>Multimeter</th><th>Probe Red</th><th>Probe Black</th><th>Expected</th></tr></thead>
+<tbody>
+<tr><td>DC V, 6000m</td><td>TP4056 B+ pad</td><td>TP4056 B− pad</td><td><strong>3000 – 4200 mV</strong></td></tr>
+</tbody>
+</table>
+<p><span class="pass">PASS:</span> Reading in range &nbsp;&nbsp; <span class="fail">FAIL:</span> 0V or negative — reverse polarity</p>
+</div>
+
+<div class="test-box">
+<strong>Test 1.2 — Charging Function</strong>
+<p>Plug USB-C cable into TP4056 module.</p>
+<table>
+<thead><tr><th>Indicator</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>RED LED on</td><td><span class="pass">PASS</span> — Charging</td></tr>
+<tr><td>BLUE/GREEN LED on</td><td><span class="pass">PASS</span> — Already full</td></tr>
+<tr><td>No LED</td><td><span class="fail">FAIL</span> — Check USB cable & joints</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>4. Stage 2 — Boost Converter (MT3608)</h2>
+
+<h3>MT3608 Module Layout</h3>
+
+<div class="module-diagram">
+<div class="module-title">MT3608 Boost Converter (Top View)</div>
+<div class="module-box">
+[ ● BRASS ADJUSTMENT SCREW (trimpot) ]<br>
+<span style="font-size:9pt;">Turn clockwise to raise output voltage</span>
+</div>
+<div class="pin-row">
+  <div class="pin">IN+<div class="pin-label">from TP4056 OUT+</div></div>
+  <div class="pin">IN−<div class="pin-label">from TP4056 OUT−</div></div>
+  <div class="pin">OUT+<div class="pin-label">boosted 5V</div></div>
+  <div class="pin">OUT−<div class="pin-label">GND</div></div>
+</div>
+</div>
+
+<h3>Step 2.1 — Wire TP4056 to MT3608</h3>
+
+<table>
+<thead><tr><th>From</th><th>To</th><th>Wire</th></tr></thead>
+<tbody>
+<tr><td>TP4056 <strong>OUT+</strong></td><td>MT3608 <strong>IN+</strong></td><td><span class="wire-key red"></span> Red</td></tr>
+<tr><td>TP4056 <strong>OUT−</strong></td><td>MT3608 <strong>IN−</strong></td><td><span class="wire-key black"></span> Black</td></tr>
+</tbody>
+</table>
+
+<div class="test-box">
+<strong>Test 2.1 — MT3608 Receiving Power</strong>
+<table>
+<thead><tr><th>Multimeter</th><th>Probe Red</th><th>Probe Black</th><th>Expected</th></tr></thead>
+<tbody>
+<tr><td>DC V, 6000m</td><td>MT3608 IN+</td><td>MT3608 IN−</td><td><strong>3000 – 4200 mV</strong> (matches battery)</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3>Step 2.2 — Add Smoothing Capacitor</h3>
+
+<div class="warning">
+Capacitor polarity matters. Long leg = positive (+). Short leg or striped side = negative (−). Reversed = can explode.
+</div>
+
+<table>
+<thead><tr><th>Component Leg</th><th>To</th></tr></thead>
+<tbody>
+<tr><td>Capacitor <strong>LONG leg (+)</strong></td><td>MT3608 <strong>OUT+</strong> pad</td></tr>
+<tr><td>Capacitor <strong>SHORT leg (−)</strong> (striped)</td><td>MT3608 <strong>OUT−</strong> pad</td></tr>
+</tbody>
+</table>
+
+<p>Trim legs to ~10mm and solder cap directly to MT3608 output pads.</p>
+
+<h3>Step 2.3 — Adjust Output Voltage to 5V</h3>
+
+<div class="warning">
+Set voltage BEFORE connecting anything downstream. Overvoltage will destroy the CYD.
+</div>
+
+<ol>
+  <li>Multimeter to <strong>DC V, 6000m range</strong></li>
+  <li><strong>Red probe</strong> → MT3608 OUT+ pad</li>
+  <li><strong>Black probe</strong> → MT3608 OUT− pad</li>
+  <li>Use small screwdriver on brass trimpot</li>
+  <li>Turn <strong>clockwise slowly</strong> — may take 15-25 turns to start rising</li>
+</ol>
+
+<div class="test-box">
+<strong>Test 2.3 — Target Output Voltage</strong>
+<table>
+<thead><tr><th>Reading (mV)</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>Below 4900</td><td>Turn clockwise more</td></tr>
+<tr><td><strong>5000 – 5100</strong></td><td><span class="pass">PASS — STOP HERE</span></td></tr>
+<tr><td>5100 – 5200</td><td>Acceptable, slightly high</td></tr>
+<tr><td>Above 5200</td><td>Turn counter-clockwise immediately</td></tr>
+<tr><td>"OL" displayed</td><td>Switch to 60V range, find reading, turn DOWN</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>5. Stage 3 — Power Switch</h2>
+
+<h3>SPDT Slide Switch Layout</h3>
+
+<div class="module-diagram">
+<div class="module-title">SPDT Slide Switch (3-Pin)</div>
+<div class="module-box">
+[ ◀━━━━ Slider ━━━━▶ ]
+</div>
+<div class="pin-row">
+  <div class="pin">Pin 1<div class="pin-label">Output A</div></div>
+  <div class="pin" style="background:#ffeeaa;">Pin 2<div class="pin-label">INPUT (always)</div></div>
+  <div class="pin">Pin 3<div class="pin-label">Output B</div></div>
+</div>
+<p style="font-size:9pt; text-align:center; margin-top:12px;">Middle pin is the input. Slider connects it to one outer pin at a time.</p>
+</div>
+
+<h3>Step 3.1 — Wire the Switch</h3>
+
+<table>
+<thead><tr><th>From</th><th>To</th><th>Wire</th></tr></thead>
+<tbody>
+<tr><td>MT3608 <strong>OUT+</strong></td><td>Switch <strong>Pin 2 (MIDDLE)</strong></td><td><span class="wire-key red"></span> Red</td></tr>
+<tr><td>Switch <strong>Pin 1 OR Pin 3</strong> (your choice)</td><td>To pigtail in Stage 4</td><td><span class="wire-key red"></span> Red</td></tr>
+</tbody>
+</table>
+
+<div class="test-box">
+<strong>Test 3.1 — Switch Function</strong>
+<table>
+<thead><tr><th>Probe Red</th><th>Probe Black</th><th>Switch Position</th><th>Expected</th></tr></thead>
+<tbody>
+<tr><td>Chosen outer pin</td><td>MT3608 OUT−</td><td>ON (slider toward chosen pin)</td><td><strong>5000 – 5100 mV</strong></td></tr>
+<tr><td>Chosen outer pin</td><td>MT3608 OUT−</td><td>OFF (slider opposite direction)</td><td><strong>0 mV</strong></td></tr>
+</tbody>
+</table>
+<p><span class="pass">PASS:</span> Cleanly toggles between 5V and 0V</p>
+</div>
+
+<h2>6. Stage 4 — CYD Power Input</h2>
+
+<h3>Why USB Instead of VIN?</h3>
+
+<p>The CYD's internal CH340 chip needs the USB connector's V+ pin powered for the ESP32 to boot normally. Powering through VIN causes a boot loop. The micro USB pigtail is the proven fix.</p>
+
+<h3>Micro USB Pigtail Layout</h3>
+
+<div class="module-diagram">
+<div class="module-title">Micro USB Male Pigtail (2-Wire)</div>
+<div class="module-box">
+<span style="font-size:9pt;">Bare wires →</span> &nbsp;&nbsp; <span class="wire-key red"></span> RED (+5V) &nbsp;&nbsp; <span class="wire-key black"></span> BLACK (GND) &nbsp;&nbsp; <span style="font-size:9pt;">→ [ Micro USB Male Plug ]</span>
+</div>
+</div>
+
+<h3>Step 4.1 — Connect Pigtail</h3>
+
+<table>
+<thead><tr><th>From</th><th>To</th><th>Wire</th></tr></thead>
+<tbody>
+<tr><td>Switch chosen outer pin</td><td>Pigtail <strong>RED</strong> wire</td><td><span class="wire-key red"></span> Red</td></tr>
+<tr><td>MT3608 <strong>OUT−</strong></td><td>Pigtail <strong>BLACK</strong> wire</td><td><span class="wire-key black"></span> Black</td></tr>
+</tbody>
+</table>
+
+<p>Plug the micro USB end into the CYD's micro USB port.</p>
+
+<div class="test-box">
+<strong>Test 4.1 — Voltage at Plug</strong>
+<table>
+<thead><tr><th>Probe Red</th><th>Probe Black</th><th>Switch</th><th>Expected</th></tr></thead>
+<tbody>
+<tr><td>Pigtail RED</td><td>Pigtail BLACK</td><td>ON</td><td><strong>5000 – 5100 mV</strong></td></tr>
+<tr><td>Pigtail RED</td><td>Pigtail BLACK</td><td>OFF</td><td><strong>0 mV</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="test-box">
+<strong>Test 4.2 — Boot Test</strong>
+<p>Plug into CYD, switch ON.</p>
+<table>
+<thead><tr><th>Observation</th><th>Result</th></tr></thead>
+<tbody>
+<tr><td>MTG setup screen appears within 2 seconds</td><td><span class="pass">PASS</span></td></tr>
+<tr><td>Display flashes / boot loop</td><td><span class="fail">FAIL</span> — re-verify voltage 5.0-5.1V</td></tr>
+<tr><td>Display stays black</td><td><span class="fail">FAIL</span> — check pigtail seating</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>7. Stage 5 — Haptic Feedback Circuit</h2>
+
+<h3>2N7000 MOSFET Pinout</h3>
+
+<div class="module-diagram">
+<div class="module-title">2N7000 N-Channel MOSFET (TO-92 Package)</div>
+<div class="module-box">
+<div style="display:inline-block; border:2px solid #000; padding:14px 30px; background:#fff;">2N7000<br><span style="font-size:8pt;">(flat side facing you, leads down)</span></div>
+</div>
+<div class="pin-row">
+  <div class="pin">Pin 1<div class="pin-label">SOURCE</div></div>
+  <div class="pin">Pin 2<div class="pin-label">GATE</div></div>
+  <div class="pin">Pin 3<div class="pin-label">DRAIN</div></div>
+</div>
+</div>
+
+<h3>Circuit Connection Summary</h3>
+
+<table>
+<thead><tr><th>From</th><th>To</th><th>Wire / Component</th></tr></thead>
+<tbody>
+<tr><td>2N7000 <strong>Pin 1 (Source)</strong></td><td>CYD <strong>GND</strong> (CN1 pin 1 or P3 pin 1)</td><td><span class="wire-key black"></span> Black</td></tr>
+<tr><td>2N7000 <strong>Pin 2 (Gate)</strong></td><td>CYD <strong>GND</strong></td><td><strong>10kΩ resistor</strong> (pull-down)</td></tr>
+<tr><td>CYD <strong>GPIO22</strong> (CN1 pin 2)</td><td>2N7000 <strong>Pin 2 (Gate)</strong></td><td><strong>1kΩ resistor</strong> inline</td></tr>
+<tr><td>CYD <strong>3.3V</strong> (CN1 pin 4)</td><td>Motor <strong>RED (+)</strong></td><td><span class="wire-key red"></span> Red</td></tr>
+<tr><td>Motor <strong>BLACK (−)</strong></td><td>2N7000 <strong>Pin 3 (Drain)</strong></td><td><span class="wire-key blue"></span> Blue or Black</td></tr>
+<tr><td>2N7000 <strong>Pin 3 (Drain)</strong></td><td>CYD <strong>3.3V</strong></td><td><strong>1N4148 diode</strong> (stripe toward 3.3V)</td></tr>
+</tbody>
+</table>
+
+<h3>Visual Circuit Reference</h3>
+
+<div class="module-diagram">
+<pre style="font-family:'Courier New', monospace; font-size:9pt; line-height:1.4; margin:0;">
+   CYD 3.3V ────────┬────────── Motor RED (+)
+                    │
+              ┌─[1N4148]─┐    ← stripe points toward 3.3V
+              │          │
+              │          │
+                         └──── Motor BLACK (−)
+                                    │
+                                    ▼
+                              [Pin 3: Drain]
+                              ┌────────────┐
+                              │   2N7000   │
+                              │   MOSFET   │
+                              └────────────┘
+                              [Pin 1: Source]
+                                    │
+                                    ▼
+                                CYD GND
+
+   CYD GPIO22 ─[1kΩ]──┬── [Pin 2: Gate]
+                      │
+                   [10kΩ]
+                      │
+                   CYD GND
+</pre>
+</div>
+
+<div class="warning">
+The 10kΩ pull-down resistor is CRITICAL. Without it, the motor will run constantly because the MOSFET gate floats high.
+</div>
+
+<div class="test-box">
+<strong>Test 5.1 — Idle Gate Voltage (no sketch running motor)</strong>
+<table>
+<thead><tr><th>Probe Red</th><th>Probe Black</th><th>Expected</th></tr></thead>
+<tbody>
+<tr><td>2N7000 Pin 2 (Gate)</td><td>CYD GND</td><td><strong>0 mV</strong></td></tr>
+</tbody>
+</table>
+<p><span class="pass">PASS:</span> 0V means pull-down working &nbsp;&nbsp; <span class="fail">FAIL:</span> Any other reading — check 10kΩ resistor</p>
+</div>
+
+<div class="test-box">
+<strong>Test 5.2 — Active Gate Voltage (during buzz)</strong>
+<table>
+<thead><tr><th>Probe Red</th><th>Probe Black</th><th>Sketch State</th><th>Expected</th></tr></thead>
+<tbody>
+<tr><td>2N7000 Pin 2 (Gate)</td><td>CYD GND</td><td>Buzz active</td><td><strong>~3300 mV (3.3V)</strong></td></tr>
+<tr><td>2N7000 Pin 2 (Gate)</td><td>CYD GND</td><td>Quiet</td><td><strong>0 mV</strong></td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>8. Final System Verification</h2>
+
+<h3>Complete Power-On Checklist</h3>
+
+<table>
+<thead><tr><th>#</th><th>Action</th><th>Expected Result</th><th>Done</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Battery connected, switch OFF</td><td>CYD dark, no LEDs</td><td>☐</td></tr>
+<tr><td>2</td><td>Flip switch ON</td><td>CYD boots in ~2 seconds</td><td>☐</td></tr>
+<tr><td>3</td><td>Tap touchscreen</td><td>UI responds</td><td>☐</td></tr>
+<tr><td>4</td><td>Adjust life count</td><td>Number changes</td><td>☐</td></tr>
+<tr><td>5</td><td>Touch +/- triggers haptic</td><td>Brief motor buzz</td><td>☐</td></tr>
+<tr><td>6</td><td>Flip switch OFF</td><td>CYD shuts off cleanly</td><td>☐</td></tr>
+<tr><td>7</td><td>Plug USB-C into TP4056</td><td>RED LED — charging</td><td>☐</td></tr>
+<tr><td>8</td><td>Wait for full charge</td><td>BLUE/GREEN LED</td><td>☐</td></tr>
+</tbody>
+</table>
+
+<h3>Master Voltage Reference Card</h3>
+
+<p>Use these readings any time something stops working. Probe between the listed points with multimeter on DC V, 6000m range.</p>
+
+<table>
+<thead><tr><th>Test Point</th><th>Probe Red</th><th>Probe Black</th><th>Expected</th></tr></thead>
+<tbody>
+<tr><td>Battery</td><td>B+</td><td>B−</td><td>3000 – 4200 mV</td></tr>
+<tr><td>TP4056 output</td><td>OUT+</td><td>OUT−</td><td>Same as battery</td></tr>
+<tr><td>MT3608 input</td><td>IN+</td><td>IN−</td><td>Same as battery</td></tr>
+<tr><td>MT3608 output</td><td>OUT+</td><td>OUT−</td><td>5000 – 5100 mV</td></tr>
+<tr><td>Switch output (ON)</td><td>Outer pin</td><td>MT3608 OUT−</td><td>5000 – 5100 mV</td></tr>
+<tr><td>Switch output (OFF)</td><td>Outer pin</td><td>MT3608 OUT−</td><td>0 mV</td></tr>
+<tr><td>USB plug</td><td>Pigtail RED</td><td>Pigtail BLACK</td><td>5000 – 5100 mV</td></tr>
+<tr><td>MOSFET Gate (idle)</td><td>Pin 2</td><td>GND</td><td>0 mV</td></tr>
+<tr><td>MOSFET Gate (buzz)</td><td>Pin 2</td><td>GND</td><td>~3300 mV</td></tr>
+</tbody>
+</table>
+
+<h2>9. Troubleshooting</h2>
+
+<h3>CYD Won't Boot — Just Flashes</h3>
+<table>
+<thead><tr><th>Likely Cause</th><th>Test</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Voltage drop under load</td><td>Probe MT3608 OUT while flashing</td><td>Re-adjust trimpot to 5.05V</td></tr>
+<tr><td>Capacitor failure / wrong polarity</td><td>Visual check stripe placement</td><td>Re-solder cap correct way</td></tr>
+<tr><td>Battery too low</td><td>Probe B+ to B−</td><td>Charge to above 3.7V</td></tr>
+<tr><td>Pigtail not seated</td><td>Wiggle plug, observe</td><td>Re-seat firmly</td></tr>
+</tbody>
+</table>
+
+<h3>Motor Runs Constantly</h3>
+<table>
+<thead><tr><th>Likely Cause</th><th>Test</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>10kΩ pull-down missing or open</td><td>Probe Gate to GND idle</td><td>Re-solder pull-down resistor</td></tr>
+<tr><td>MOSFET orientation flipped</td><td>Verify flat side faces you</td><td>Replace with correct pinout</td></tr>
+<tr><td>Damaged MOSFET</td><td>Swap with new 2N7000</td><td>Replace</td></tr>
+</tbody>
+</table>
+
+<h3>Motor Never Runs</h3>
+<table>
+<thead><tr><th>Likely Cause</th><th>Test</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Flyback diode reversed (shorting motor)</td><td>Visual stripe check</td><td>Reverse diode</td></tr>
+<tr><td>GPIO22 wire not connected</td><td>Probe Gate during buzz</td><td>Repair wire</td></tr>
+<tr><td>Motor leads reversed</td><td>Swap motor red/black</td><td>Re-solder</td></tr>
+<tr><td>1kΩ resistor missing</td><td>Visual</td><td>Add 1kΩ inline with GPIO22</td></tr>
+</tbody>
+</table>
+
+<h3>MT3608 Won't Output 5V</h3>
+<table>
+<thead><tr><th>Likely Cause</th><th>Test</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Not enough trimpot turns</td><td>Count turns (15-25 needed)</td><td>Continue clockwise</td></tr>
+<tr><td>No input power</td><td>Probe IN+ to IN−</td><td>Fix TP4056 connections</td></tr>
+<tr><td>Defective module</td><td>Swap with spare MT3608</td><td>Replace</td></tr>
+</tbody>
+</table>
+
+<h3>TP4056 Won't Charge</h3>
+<table>
+<thead><tr><th>Likely Cause</th><th>Test</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Battery polarity reversed</td><td>Probe B+ should be positive</td><td>Swap battery wires</td></tr>
+<tr><td>USB cable lacks power lines</td><td>Try known-good cable</td><td>Replace USB cable</td></tr>
+<tr><td>Dead battery</td><td>Probe battery voltage</td><td>Replace battery</td></tr>
+</tbody>
+</table>
+
+<div class="signature-line">
+CYD Commander Project — Hardware Assembly Guide v3.0
+</div>
+
+</body>
+</html>

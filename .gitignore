@@ -1,0 +1,49 @@
+# Unity generated (regenerated on each machine)
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# IDE / build files
+.vs/
+.idea/
+.vscode/
+*.csproj
+*.sln
+*.user
+*.unityproj
+*.pidb
+*.booproj
+*.suo
+*.tmp
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# Asset import / crash artifacts
+sysinfo.txt
+*.stackdump
+crashlytics-build.properties
+
+# Standalone player builds
+*.apk
+*.aab
+*.ipa
+*.app/
+
+# unitypackages live in Downloads, not the repo
+*.unitypackage
+
+# Claude's local memory + unrelated projects (per project notes)
+.claude/
+CYD_Commander/
+CYD_Commander_Wokwi/
+
+# Local screenshot/diagnostic artifacts written to the repo root
+/_*.png

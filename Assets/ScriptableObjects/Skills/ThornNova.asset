@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d189b9c28f0f0a49bcc9c8115dae3fe, type: 3}
+  m_Name: ThornNova
+  m_EditorClassIdentifier: 
+  skillName: Thorn Nova
+  description: Erupts thorns around the target, damaging everything nearby.
+  faction: 1
+  characterClass: 6
+  damageType: 2
+  targetType: 1
+  range: 11
+  aoeRadius: 4
+  selfCentered: 0
+  castTime: 0
+  cooldown: 3.5
+  mpCost: 30
+  animTrigger: AoE
+  damageMultiplier: 1.4
+  dotDamage: 0
+  dotDuration: 0
+  dotTickRate: 1
+  dotSpreadChance: 0
+  statusEffect: 0
+  statusDuration: 0
+  vfxPrefab: {fileID: 0}

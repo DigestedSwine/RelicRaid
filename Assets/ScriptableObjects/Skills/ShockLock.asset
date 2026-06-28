@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d189b9c28f0f0a49bcc9c8115dae3fe, type: 3}
+  m_Name: ShockLock
+  m_EditorClassIdentifier: 
+  skillName: Shock Lock
+  description: A storm bolt that locks the target in place.
+  faction: 0
+  characterClass: 0
+  damageType: 4
+  targetType: 0
+  range: 12
+  aoeRadius: 0
+  selfCentered: 0
+  castTime: 0
+  cooldown: 5
+  mpCost: 25
+  animTrigger: Attack
+  damageMultiplier: 0.5
+  dotDamage: 0
+  dotDuration: 0
+  dotTickRate: 1
+  dotSpreadChance: 0
+  statusEffect: 3
+  statusDuration: 2
+  vfxPrefab: {fileID: 0}
