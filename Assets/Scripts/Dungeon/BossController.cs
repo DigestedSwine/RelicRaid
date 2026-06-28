@@ -74,7 +74,17 @@ public class BossController : MonoBehaviour
     void OnDeath()
     {
         Vector3 pos = portalSpawnPoint != null ? portalSpawnPoint.position : transform.position;
-        if (exitPortalPrefab != null) Instantiate(exitPortalPrefab, pos, Quaternion.identity);
+        if (exitPortalPrefab != null)
+        {
+            // Networked: only the authority (master) spawns it → one portal replicated to all clients.
+            var no = GetComponent<Fusion.NetworkObject>();
+            if (no != null && no.Runner != null)
+            {
+                if (no.HasStateAuthority)
+                    no.Runner.Spawn(exitPortalPrefab.GetComponent<Fusion.NetworkObject>(), pos, Quaternion.identity);
+            }
+            else Instantiate(exitPortalPrefab, pos, Quaternion.identity);   // single-player fallback
+        }
         DungeonEvents.RaiseBossDefeated(this);
     }
 }

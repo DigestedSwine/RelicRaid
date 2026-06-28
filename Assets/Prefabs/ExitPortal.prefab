@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2660276768472857837}
   - component: {fileID: 4667479663517687835}
   - component: {fileID: 3593780154924156352}
+  - component: {fileID: 8226033521438789746}
   m_Layer: 0
   m_Name: ExitPortal
   m_TagString: Untagged
@@ -123,3 +124,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2254a4ebfb4df614eb22438fdc3081b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  returnToEntryOnEnter: 1
+  destinationOverride: {fileID: 0}
+--- !u!114 &8226033521438789746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166396763076555877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 3320061727
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours: []
+  ForceRemoteRenderTimeframe: 0

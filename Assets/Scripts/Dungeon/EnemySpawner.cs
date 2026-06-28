@@ -18,7 +18,12 @@ public class EnemySpawner : MonoBehaviour
     public IReadOnlyList<GameObject> Spawned => spawned;
     bool autoDone;
 
-    void Start() { if (spawnOnStart && net == null) Spawn(); }   // single-player path
+    void Start()
+    {
+        // Prefab children (e.g. boss-add spawners) can't serialize a scene NetworkBootstrap ref — auto-find it.
+        if (net == null) net = Object.FindFirstObjectByType<NetworkBootstrap>();
+        if (spawnOnStart && net == null) Spawn();   // truly no networking → local
+    }
 
     void Update()   // networked path: spawn once, on the master, after the session is up
     {
