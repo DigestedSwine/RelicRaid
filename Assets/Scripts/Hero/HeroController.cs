@@ -20,6 +20,10 @@ public class HeroController : MonoBehaviour
     [Header("Animator")]
     public float animDamp = 0.1f;        // smoothing on the Speed param
 
+    [Header("Networking")]
+    [Tooltip("When true, movement is driven by NetworkPlayer.FixedUpdateNetwork (so NetworkTransform syncs it). Update() stops moving.")]
+    public bool networkDriven = false;
+
     CharacterController cc;
     Animator animator;
     float verticalVel;
@@ -45,6 +49,12 @@ public class HeroController : MonoBehaviour
 
     void Update()
     {
+        if (!networkDriven) DoMove(Time.deltaTime);   // single-player path; networked players call DoMove from the net tick
+    }
+
+    // One movement+animation step. Called from Update (local) or NetworkPlayer.FixedUpdateNetwork (networked).
+    public void DoMove(float dt)
+    {
         Vector2 move = input != null ? input.MoveInput : Vector2.zero;
 
         // Camera-relative: W = away from the camera, D = camera-right — so WASD always matches the
@@ -64,21 +74,21 @@ public class HeroController : MonoBehaviour
 
         // Gravity so the CharacterController stays grounded.
         if (cc.isGrounded && verticalVel < 0f) verticalVel = -2f;
-        verticalVel += gravity * Time.deltaTime;
+        verticalVel += gravity * dt;
 
         Vector3 velocity = horizontal + Vector3.up * verticalVel;
-        cc.Move(velocity * Time.deltaTime);
+        cc.Move(velocity * dt);
 
         // Face travel direction.
         if (dir.sqrMagnitude > 0.001f)
         {
             Quaternion look = Quaternion.LookRotation(dir, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(
-                transform.rotation, look, rotationSpeed * Time.deltaTime);
+                transform.rotation, look, rotationSpeed * dt);
         }
 
         // Feed the locomotion blend tree (planar speed only).
         if (animator != null)
-            animator.SetFloat(SpeedHash, horizontal.magnitude, animDamp, Time.deltaTime);
+            animator.SetFloat(SpeedHash, horizontal.magnitude, animDamp, dt);
     }
 }

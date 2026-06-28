@@ -10,11 +10,13 @@ public class NetworkPlayer : NetworkBehaviour
     [Networked] public float NetSpeed { get; set; }
 
     Animator animator;
+    HeroController hero;
     static readonly int SpeedHash = Animator.StringToHash("Speed");
 
     public override void Spawned()
     {
         animator = GetComponentInChildren<Animator>();
+        hero = GetComponent<HeroController>();
         bool local = HasStateAuthority;
 
         // Local-only control components — off on remote proxies (they're driven by the network instead).
@@ -24,6 +26,7 @@ public class NetworkPlayer : NetworkBehaviour
         Toggle<Miner>(local);
         Toggle<PlayerTargeting>(local);
         var cc = GetComponent<CharacterController>(); if (cc != null) cc.enabled = local;
+        if (hero != null) hero.networkDriven = local;   // local player moves from the net tick (FixedUpdateNetwork)
 
         if (local) WireLocalPlayer();
     }
@@ -64,8 +67,11 @@ public class NetworkPlayer : NetworkBehaviour
 
     public override void FixedUpdateNetwork()
     {
-        // Authority publishes its locomotion speed for proxies to play.
-        if (HasStateAuthority && animator != null) NetSpeed = animator.GetFloat(SpeedHash);
+        if (!HasStateAuthority) return;
+        // Move on the network tick so NetworkTransform captures it (moving in Update gets overwritten).
+        if (hero != null && hero.enabled) hero.DoMove(Runner.DeltaTime);
+        // Publish locomotion speed for proxies to play.
+        if (animator != null) NetSpeed = animator.GetFloat(SpeedHash);
     }
 
     public override void Render()
