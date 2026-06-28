@@ -19,13 +19,14 @@ public class NetworkEnemy : NetworkBehaviour
         npc = GetComponent<NPCController>();
         health = GetComponent<HealthComponent>();
         animator = GetComponentInChildren<Animator>();
-        if (npc != null) npc.enabled = HasStateAuthority;            // AI only on the authority (master)
+        if (npc != null) { npc.enabled = HasStateAuthority; npc.networkDriven = HasStateAuthority; }   // AI only on the authority, driven by the net tick
         if (HasStateAuthority && health != null) NetHP = health.CurrentHP;
     }
 
     public override void FixedUpdateNetwork()
     {
         if (!HasStateAuthority) return;
+        if (npc != null && npc.enabled) npc.Tick(Runner.DeltaTime);   // run AI/move on the net tick so NetworkTransform syncs it
         if (animator != null) NetSpeed = animator.GetFloat(SpeedHash);
         if (health != null) NetHP = health.CurrentHP;
     }

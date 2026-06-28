@@ -60,6 +60,8 @@ public class NPCController : MonoBehaviour
     Transform[] footBones;
     Vector3 roamTarget; bool hasRoamTarget; float roamPauseUntil;
     float stunnedUntil;
+    float tickDt = 0f;
+    [HideInInspector] public bool networkDriven = false;   // set by NetworkEnemy: AI runs from the net tick, not Update
 
     // Crowd control: freezes movement + attacks until the timer expires (extends, never shortens).
     public void ApplyStun(float duration) { stunnedUntil = Mathf.Max(stunnedUntil, Time.time + duration); }
@@ -83,6 +85,28 @@ public class NPCController : MonoBehaviour
 
     void Update()
     {
+        if (networkDriven) return;            // networked: NetworkEnemy drives Tick() on the net tick instead
+        tickDt = Time.deltaTime;
+        RunAI();
+    }
+
+    // Ground in LateUpdate, AFTER the Animator has posed the skeleton this frame, so foot positions are current.
+    void LateUpdate()
+    {
+        if (!networkDriven && stickToTerrain) StickToGround();
+    }
+
+    // Movement + grounding step. Update() calls it for single-player; NetworkEnemy.FixedUpdateNetwork calls it
+    // on the authority so NetworkTransform captures the movement (moving in Update gets overwritten).
+    public void Tick(float dt)
+    {
+        tickDt = dt;
+        RunAI();
+        if (stickToTerrain) StickToGround();
+    }
+
+    void RunAI()
+    {
         if (state == State.Dead || !health.IsAlive) { SetSpeed(0f); return; }
         if (IsStunned) { SetSpeed(0f); return; }   // frozen by crowd control
 
@@ -98,12 +122,6 @@ public class NPCController : MonoBehaviour
             case State.Attack: TickAttack(); break;
             case State.Leash:  TickLeash();  break;
         }
-    }
-
-    // Ground in LateUpdate, AFTER the Animator has posed the skeleton this frame, so foot positions are current.
-    void LateUpdate()
-    {
-        if (stickToTerrain) StickToGround();
     }
 
     void CacheFootBones()
@@ -197,7 +215,7 @@ public class NPCController : MonoBehaviour
         Vector3 dir = dest - transform.position; dir.y = 0f;
         if (dir.sqrMagnitude < 0.0001f) { SetSpeed(0f); return; }
         dir.Normalize();
-        transform.position += dir * speed * Time.deltaTime;
+        transform.position += dir * speed * tickDt;
         FaceDir(dir);
         SetSpeed(speed);
     }
@@ -207,7 +225,7 @@ public class NPCController : MonoBehaviour
     void FaceDir(Vector3 dir)
     {
         Quaternion look = Quaternion.LookRotation(dir) * Quaternion.Euler(0f, faceYawOffset, 0f);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, look, turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, look, turnSpeed * tickDt);
     }
 
     void StickToGround()
