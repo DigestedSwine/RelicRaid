@@ -80,9 +80,10 @@ public class JoinScreen : MonoBehaviour
 
     void Update()
     {
-        if (!joining || net == null) return;
-        if (net.Connected) { root.style.display = DisplayStyle.None; joining = false; }
-        else if (!net.Connecting) { status.text = "Connection failed — tap JOIN to retry"; joining = false; }
+        if (net == null) return;
+        // Hide whenever connected — covers both the JOIN button and auto-connect.
+        if (net.Connected) { if (root != null) root.style.display = DisplayStyle.None; joining = false; return; }
+        if (joining && !net.Connecting) { status.text = "Connection failed — tap JOIN to retry"; joining = false; }
     }
 
     static Label Lbl(string t, float s, Color c, FontStyle fs = FontStyle.Normal)

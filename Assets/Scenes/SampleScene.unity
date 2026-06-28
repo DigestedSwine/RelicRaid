@@ -8427,7 +8427,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 5121612943635487414, guid: 0a64197b7c607534588c73edc7b0d82b, type: 3}
   sessionName: RelicRaid-Dev
   spawnPoint: {x: -67, y: 2.2, z: -55}
-  autoConnect: 0
+  autoConnect: 1
 --- !u!4 &1499442413
 Transform:
   m_ObjectHideFlags: 0
