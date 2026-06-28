@@ -1285,6 +1285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawners:
   - {fileID: 1016172783}
+  clearRadius: 14
   alertTogether: 1
 --- !u!4 &207574800
 Transform:
@@ -2342,10 +2343,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4126963710831279587, guid: 23c90a03115e69f44b83fd6f0a11a58c, type: 3}
+  net: {fileID: 1499442412}
   count: 3
   scatterRadius: 3
   spawnOnStart: 0
   enemiesRespawn: 0
+  leashOverride: -1
 --- !u!1 &393118608
 GameObject:
   m_ObjectHideFlags: 0
@@ -3567,10 +3570,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4126963710831279587, guid: 23c90a03115e69f44b83fd6f0a11a58c, type: 3}
+  net: {fileID: 1499442412}
   count: 2
   scatterRadius: 3
   spawnOnStart: 1
   enemiesRespawn: 0
+  leashOverride: 10
 --- !u!4 &736659469
 Transform:
   m_ObjectHideFlags: 0
@@ -4550,6 +4555,7 @@ MonoBehaviour:
   damageType: 0
   attackTrigger: Attack
   speedParam: Speed
+  networkDriven: 0
 --- !u!114 &919008389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5458,10 +5464,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 226282377654218106, guid: 0d6219e81246f494d8dadb51d415a8f6, type: 3}
+  net: {fileID: 1499442412}
   count: 3
   scatterRadius: 4
   spawnOnStart: 1
   enemiesRespawn: 0
+  leashOverride: 10
 --- !u!4 &1016172784
 Transform:
   m_ObjectHideFlags: 0
@@ -7702,6 +7710,7 @@ MonoBehaviour:
   spawners:
   - {fileID: 2051443280}
   - {fileID: 736659468}
+  clearRadius: 14
   alertTogether: 1
 --- !u!4 &1374558557
 Transform:
@@ -8155,6 +8164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawners:
   - {fileID: 2005476664}
+  clearRadius: 14
   alertTogether: 1
 --- !u!4 &1452068446
 Transform:
@@ -9000,10 +9010,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 226282377654218106, guid: 0d6219e81246f494d8dadb51d415a8f6, type: 3}
+  net: {fileID: 1499442412}
   count: 2
   scatterRadius: 3
   spawnOnStart: 0
   enemiesRespawn: 0
+  leashOverride: -1
 --- !u!1 &1621903056
 GameObject:
   m_ObjectHideFlags: 0
@@ -11500,10 +11512,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 4126963710831279587, guid: 23c90a03115e69f44b83fd6f0a11a58c, type: 3}
+  net: {fileID: 1499442412}
   count: 3
   scatterRadius: 4
   spawnOnStart: 1
   enemiesRespawn: 0
+  leashOverride: 10
 --- !u!4 &2005476665
 Transform:
   m_ObjectHideFlags: 0
@@ -11757,10 +11771,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 226282377654218106, guid: 0d6219e81246f494d8dadb51d415a8f6, type: 3}
+  net: {fileID: 1499442412}
   count: 2
   scatterRadius: 3
   spawnOnStart: 1
   enemiesRespawn: 0
+  leashOverride: 10
 --- !u!4 &2051443281
 Transform:
   m_ObjectHideFlags: 0
