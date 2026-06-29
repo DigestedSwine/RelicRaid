@@ -19,9 +19,11 @@
 # Force text + LF for Unity YAML so it merges cleanly cross-platform
 *.unity     text
 *.prefab    text
-*.asset     text
 *.mat       text
 *.controller text
 *.anim      text
 *.meta      text
 *.cs        text
+
+# .asset is BINARY for TerrainData / Texture2D (binary even in ForceText) — never normalize line endings
+*.asset     binary
