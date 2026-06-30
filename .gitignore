@@ -40,6 +40,10 @@ crashlytics-build.properties
 # unitypackages live in Downloads, not the repo
 *.unitypackage
 
+# Unity MCP bridge: dev-only tool, embedded locally on the Windows dev box so Claude can
+# drive the Editor. NOT committed — its git-URL form hangs the Mac's headless Package Manager.
+/Packages/com.coplaydev.unity-mcp/
+
 # Claude's local memory + unrelated projects (per project notes)
 .claude/
 CYD_Commander/
