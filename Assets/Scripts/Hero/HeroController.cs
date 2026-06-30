@@ -66,10 +66,14 @@ public class HeroController : MonoBehaviour
             right = cameraTransform.right; right.y = 0f; right.Normalize();
         }
         Vector3 dir = right * move.x + fwd * move.y;
-        if (dir.sqrMagnitude > 1f) dir.Normalize();
+        float mag = Mathf.Clamp01(dir.magnitude);              // joystick deflection 0..1
+        if (mag < 0.1f) mag = 0f;                              // small deadzone (no center creep)
+        if (dir.sqrMagnitude > 0.0001f) dir.Normalize();       // keep direction, drop magnitude
 
+        // Analog: speed scales with how far the stick is pushed, maxing at runSpeed (sprint) at full tilt.
+        // Sprint button still forces max for keyboard/gamepad.
         bool sprinting = input != null && input.SprintHeld;
-        float targetSpeed = sprinting ? runSpeed : walkSpeed;
+        float targetSpeed = sprinting ? runSpeed : mag * runSpeed;
         Vector3 horizontal = dir * targetSpeed;
 
         // Gravity so the CharacterController stays grounded.

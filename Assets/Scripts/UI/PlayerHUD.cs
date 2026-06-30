@@ -89,8 +89,8 @@ public class PlayerHUD : MonoBehaviour
         // Gear button (top-right corner) toggles the popup.
         var gear = new Button(ToggleOptions) { text = "⚙" };
         gear.style.position = Position.Absolute;
-        gear.style.right = 16; gear.style.top = 12;
-        gear.style.width = 34; gear.style.height = 34; gear.style.fontSize = 18;
+        gear.style.right = 16; gear.style.top = 14;
+        gear.style.width = 58; gear.style.height = 58; gear.style.fontSize = 30;   // bigger touch target
         gear.style.color = Color.white;
         gear.style.backgroundColor = new Color(0.12f, 0.13f, 0.17f, 0.92f);
         gear.style.unityTextAlign = TextAnchor.MiddleCenter;
@@ -101,7 +101,7 @@ public class PlayerHUD : MonoBehaviour
         // Popup (hidden until the gear is clicked).
         optionsPopup = new VisualElement();
         optionsPopup.style.position = Position.Absolute;
-        optionsPopup.style.right = 16; optionsPopup.style.top = 52; optionsPopup.style.minWidth = 200;
+        optionsPopup.style.right = 16; optionsPopup.style.top = 80; optionsPopup.style.minWidth = 220;
         optionsPopup.style.paddingLeft = 12; optionsPopup.style.paddingRight = 12;
         optionsPopup.style.paddingTop = 10; optionsPopup.style.paddingBottom = 12;
         optionsPopup.style.backgroundColor = new Color(0.08f, 0.09f, 0.12f, 0.97f);
@@ -190,7 +190,7 @@ public class PlayerHUD : MonoBehaviour
     {
         var panel = new VisualElement();
         panel.style.position = Position.Absolute;
-        panel.style.right = 18; panel.style.top = 54; panel.style.minWidth = 150;   // below the gear button
+        panel.style.right = 18; panel.style.top = 82; panel.style.minWidth = 150;   // below the bigger gear button
         panel.style.alignItems = Align.FlexEnd;
         panel.pickingMode = PickingMode.Ignore;
 
