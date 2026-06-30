@@ -51,10 +51,10 @@ public class PlayerHUD : MonoBehaviour
     // ---------- build ----------
     void Build(VisualElement root)
     {
-        // HP / MP (top-left)
+        // HP / MP (top-left, below the minimap)
         var bars = new VisualElement();
         bars.style.position = Position.Absolute;
-        bars.style.left = 18; bars.style.top = 18; bars.style.width = 300;
+        bars.style.left = 18; bars.style.top = 196; bars.style.width = 300;
         bars.pickingMode = PickingMode.Ignore;
         root.Add(bars);
         MakeBar(bars, "HP", new Color(0.82f, 0.16f, 0.13f), out hpFill, out hpLabel);

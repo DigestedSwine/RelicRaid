@@ -33,6 +33,11 @@ public class NetworkPlayer : NetworkBehaviour
         var cc = GetComponent<CharacterController>(); if (cc != null) cc.enabled = local;
         if (hero != null) hero.networkDriven = local;   // local player moves from the net tick (FixedUpdateNetwork)
 
+        // Minimap: you're "Self" (centers the map); everyone else is a realm ally for now. A party system will
+        // promote same-party players to PartyMember at runtime — same marker, different type.
+        var mark = GetComponent<MinimapMarker>();
+        if (mark != null) { mark.type = local ? MinimapMarkerType.Self : MinimapMarkerType.RealmAlly; mark.clampToEdge = !local; }
+
         if (local)
         {
             var boot = UnityEngine.Object.FindFirstObjectByType<NetworkBootstrap>();
