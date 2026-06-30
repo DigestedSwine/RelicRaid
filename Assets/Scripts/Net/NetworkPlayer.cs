@@ -8,6 +8,7 @@ using UnityEngine;
 public class NetworkPlayer : NetworkBehaviour
 {
     [Networked] public float NetSpeed { get; set; }
+    [Networked] public NetworkString<_32> PlayerName { get; set; }   // shown on the nameplate over other players
 
     Animator animator;
     HeroController hero;
@@ -32,7 +33,12 @@ public class NetworkPlayer : NetworkBehaviour
         var cc = GetComponent<CharacterController>(); if (cc != null) cc.enabled = local;
         if (hero != null) hero.networkDriven = local;   // local player moves from the net tick (FixedUpdateNetwork)
 
-        if (local) WireLocalPlayer();
+        if (local)
+        {
+            var boot = UnityEngine.Object.FindFirstObjectByType<NetworkBootstrap>();
+            if (boot != null) PlayerName = boot.PlayerName;
+            WireLocalPlayer();
+        }
     }
 
     void Toggle<T>(bool on) where T : UnityEngine.Behaviour { var c = GetComponent<T>(); if (c != null) c.enabled = on; }

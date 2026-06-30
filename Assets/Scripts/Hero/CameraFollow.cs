@@ -23,8 +23,20 @@ public class CameraFollow : MonoBehaviour
     Vector3 vel;
     public float yaw;                    // current orbit angle around the character (degrees), persists
 
-    // ---- Zoom (slider hook): t 0..1 → [zoomMin, zoomMax]. t=0.5 ≈ current. ----
-    public void SetZoomNormalized(float t) => zoom = Mathf.Lerp(zoomMin, zoomMax, Mathf.Clamp01(t));
+    const string ZoomKey = "settings_cam_zoom";   // persisted across sessions
+
+    void Awake()
+    {
+        if (PlayerPrefs.HasKey(ZoomKey)) zoom = Mathf.Lerp(zoomMin, zoomMax, Mathf.Clamp01(PlayerPrefs.GetFloat(ZoomKey)));
+    }
+
+    // ---- Zoom (slider hook): t 0..1 → [zoomMin, zoomMax]. t=0.5 ≈ current. Persists the choice. ----
+    public void SetZoomNormalized(float t)
+    {
+        t = Mathf.Clamp01(t);
+        zoom = Mathf.Lerp(zoomMin, zoomMax, t);
+        PlayerPrefs.SetFloat(ZoomKey, t);   // auto-flushed on quit
+    }
     public float GetZoomNormalized() => Mathf.InverseLerp(zoomMin, zoomMax, zoom);
 
     // ---- Orbit (input-agnostic): feed a screen-space drag delta (mouse or future touch). Horizontal only;

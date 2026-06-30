@@ -106,6 +106,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1680711706695919072}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8198633064842292586}
   m_SourcePrefab: {fileID: 100100000, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
 --- !u!1 &1057827507799693184 stripped
 GameObject:
@@ -330,6 +333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _NetSpeed: 0
+  _PlayerName:
+    _length: 0
+    _data:
+      Data: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &8183534480288284583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,6 +378,20 @@ MonoBehaviour:
   miner: {fileID: 7086010469064667752}
   crystalColor: {r: 0.4, g: 0.85, b: 1, a: 1}
   sparkInterval: 0.16
+--- !u!114 &8198633064842292586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057827507799693184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb0e99c86ee05d04091fe4472ca0bd34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headMargin: 0.4
+  color: {r: 0.75, g: 0.88, b: 1, a: 1}
 --- !u!95 &5982421857146771264 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 63294f653b2d3b84cb89c13ccea327fc, type: 3}
