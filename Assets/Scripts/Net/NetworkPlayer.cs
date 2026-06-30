@@ -19,6 +19,10 @@ public class NetworkPlayer : NetworkBehaviour
         hero = GetComponent<HeroController>();
         bool local = HasStateAuthority;
 
+        // CRITICAL: the InputReader is a SHARED ScriptableObject. A proxy's HeroController.OnDisable would
+        // call input.Disable() and kill input for THIS device's local player. Detach it from the proxy first.
+        if (!local && hero != null) hero.input = null;
+
         // Local-only control components — off on remote proxies (they're driven by the network instead).
         Toggle<HeroController>(local);
         Toggle<MeleeAttacker>(local);
@@ -42,6 +46,7 @@ public class NetworkPlayer : NetworkBehaviour
         if (cf != null) cf.target = transform;
         var hero = GetComponent<HeroController>();
         if (hero != null && cam != null) hero.cameraTransform = cam.transform;
+        if (hero != null && hero.input != null) hero.input.Enable();   // make sure THIS device's input is live
 
         var hud = UnityEngine.Object.FindFirstObjectByType<PlayerHUD>();
         if (hud != null)
