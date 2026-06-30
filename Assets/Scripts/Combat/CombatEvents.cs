@@ -12,4 +12,9 @@ public static class CombatEvents
 
     public static void RaiseUnitKilled(HealthComponent victim, HealthComponent killer, IReadOnlyList<HealthComponent> contributors)
         => UnitKilled?.Invoke(victim, killer, contributors);
+
+    // (victim, amount, type) — fired on every damage tick. Floating combat numbers / hit feedback subscribe.
+    public static event Action<HealthComponent, float, DamageType> UnitDamaged;
+    public static void RaiseUnitDamaged(HealthComponent victim, float amount, DamageType type)
+        => UnitDamaged?.Invoke(victim, amount, type);
 }

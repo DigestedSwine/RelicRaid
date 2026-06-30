@@ -70,6 +70,7 @@ public class HealthComponent : MonoBehaviour
         CurrentHP = Mathf.Max(0f, CurrentHP - amount);
         if (indestructible && CurrentHP <= 0f) CurrentHP = 1f;   // godmode: damage shows, but survive at 1 HP
         OnDamaged?.Invoke(amount, type);
+        CombatEvents.RaiseUnitDamaged(this, amount, type);       // floating combat numbers / hit feedback
         if (CurrentHP <= 0f) Die();
     }
 
