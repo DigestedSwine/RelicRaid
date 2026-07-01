@@ -20,12 +20,17 @@ public class MeleeAttacker : MonoBehaviour
     public float cooldown = 0.6f;
 
     float nextReady;
+    NetworkPlayer netPlayer;
+
+    void Awake() { netPlayer = GetComponent<NetworkPlayer>(); }
 
     void OnEnable()  { if (input != null) input.AttackPressed += OnAttack; }
     void OnDisable() { if (input != null) input.AttackPressed -= OnAttack; }
 
     void OnAttack()
     {
+        // Shared InputReader event → guard by authority so only the local player swings (proxies replicate via net).
+        if (netPlayer != null && !netPlayer.HasStateAuthority) return;
         if (Time.time < nextReady) return;
         if (self != null && !self.IsAlive) return;
         nextReady = Time.time + cooldown;

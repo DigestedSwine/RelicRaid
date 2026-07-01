@@ -100,6 +100,7 @@ public class NetworkPlayer : NetworkBehaviour
     public void FireAction(string trigger)
     {
         if (string.IsNullOrEmpty(trigger)) return;
+        if (!HasStateAuthority) return;                              // only the owner self-animates; proxies get RPC_Action
         if (animator != null) animator.SetTrigger(trigger);          // local, immediate
         if (Object != null && Object.IsValid) RPC_Action(TriggerId(trigger));
     }

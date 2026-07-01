@@ -32,6 +32,10 @@ public class SkillCaster : MonoBehaviour
     void OnAbility(int slot)
     {
         if (slot < 0 || slot >= skills.Length) return;
+        // The InputReader is a SHARED ScriptableObject, so its AbilityPressed event can reach more than one
+        // caster (a proxy that stayed subscribed, or two players in one process). Only the LOCAL player — the
+        // one with state authority — may cast; proxies are network-driven. This keeps players independent.
+        if (netPlayer != null && !netPlayer.HasStateAuthority) return;
         TryCast(skills[slot], slot);
     }
 
